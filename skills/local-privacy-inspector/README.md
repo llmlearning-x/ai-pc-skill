@@ -9,7 +9,7 @@
 | 特点 | 说明 |
 |------|------|
 | 🔒 **纯本地运行** | 文件不上传云端，检查过程完全在本地完成 |
-| 🎯 **单文件聚焦** | MVP 版本只检查用户指定的单个文件，范围可控 |
+| 🎯 **单文件聚焦** | 当前版本只检查用户指定的单个文件，范围可控 |
 | 🛡️ **默认脱敏** | 所有检测结果默认脱敏展示，避免二次泄露 |
 | 📊 **风险分级** | 高/中/低/提示 四级风险，快速定位问题 |
 | 📄 **报告输出** | 支持 Markdown / JSON 格式报告 |
@@ -31,11 +31,14 @@ git clone <repo-url>
 cd local-privacy-inspector
 
 # V0.2 办公文档 + V0.3 图片 OCR
-pip install python-docx pypdf openpyxl reportlab
+pip install python-docx pypdf openpyxl
 pip install rapidocr-onnxruntime
 
 # AI PC 上启用 OpenVINO 加速（可选）
 pip install openvino
+
+# 生成 demo PDF 文件（可选开发依赖）
+pip install reportlab
 ```
 
 ### 使用方式一：命令行直接扫描
@@ -85,7 +88,7 @@ local-privacy-inspector/
 │   ├── skill.py                      # CLI 主入口
 │   ├── models.py                     # 数据模型
 │   ├── extractor.py                  # 文件文本提取（V0.3 新增图片 OCR）
-│   ├── ocr_engine.py                 # V0.3 OCR 引擎（RapidOCR + OpenVINO 双后端）
+│   ├── ocr_engine.py                 # V0.3 OCR 引擎（RapidOCR 为主，OpenVINO 加速预留）
 │   ├── detector.py                   # 敏感信息检测引擎
 │   ├── masker.py                     # 脱敏处理器
 │   ├── classifier.py                 # 风险分级
@@ -107,9 +110,9 @@ local-privacy-inspector/
 
 | 版本 | 支持的格式 |
 |------|-----------|
-| V0.1 (MVP) | `.txt` `.md` `.env` `.json` `.yaml` `.yml` `.csv` |
+| V0.1 | `.txt` `.md` `.env` `.json` `.yaml` `.yml` `.csv` |
 | V0.2 | `.docx` `.pdf` `.xlsx` |
-| V0.3 | `.png` `.jpg` `.jpeg` `.bmp` `.tiff` `.webp`（图片 OCR） |
+| V0.3 | `.png` `.jpg` `.jpeg` `.bmp` `.tiff` `.tif` `.webp`（图片 OCR） |
 
 ### 检测的敏感信息
 

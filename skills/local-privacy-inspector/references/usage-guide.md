@@ -13,7 +13,7 @@
 
 ```bash
 git clone <your-repo-url>
-cd local_privacy_inspector
+cd local-privacy-inspector
 ```
 
 ```bash
@@ -63,19 +63,22 @@ python skill.py ../demo/config.yaml --format json
 | Word | `.docx` | 提取段落文本 | V0.2 |
 | PDF | `.pdf` | 提取页面文本 | V0.2 |
 | Excel | `.xlsx` | 读取单元格文本 | V0.2 |
-| 图片 OCR | `.png` `.jpg` `.jpeg` `.bmp` `.tiff` `.webp` | OCR 提取文字后检测 | V0.3 |
+| 图片 OCR | `.png` `.jpg` `.jpeg` `.bmp` `.tiff` `.tif` `.webp` | OCR 提取文字后检测 | V0.3 |
 
 各版本依赖安装：
 
 ```bash
 # V0.2 办公文档
-pip install python-docx pypdf openpyxl reportlab
+pip install python-docx pypdf openpyxl
 
 # V0.3 图片 OCR
 pip install rapidocr-onnxruntime
 
 # AI PC OpenVINO 加速（可选）
 pip install openvino
+
+# 生成 demo PDF 文件（可选开发依赖）
+pip install reportlab
 ```
 
 ## 输出说明
@@ -101,10 +104,10 @@ privacy_report_<文件名>_<时间戳>.json    # JSON 格式（指定 --format j
 
 ### Q: 可以扫描整个文件夹吗？
 
-A: MVP 版本只支持单文件扫描。如需批量扫描，可以写一个简单的 shell 脚本循环调用：
+A: 当前版本只支持单文件扫描。如需批量扫描，可以写一个简单的 shell 脚本循环调用：
 
 ```bash
-for file in folder/*.{txt,md,env,json,yaml,yml,csv,docx,pdf,xlsx,png,jpg,jpeg}; do
+for file in folder/*.{txt,md,env,json,yaml,yml,csv,docx,pdf,xlsx,png,jpg,jpeg,bmp,tiff,tif,webp}; do
     python skill.py "$file" 2>/dev/null
 done
 ```

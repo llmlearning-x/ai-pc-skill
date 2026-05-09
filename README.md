@@ -52,7 +52,7 @@ git clone https://github.com/llmlearning-x/ai-pc-skill.git
 cd ai-pc-skill/skills/local-privacy-inspector
 
 # 安装依赖
-pip install python-docx pypdf openpyxl reportlab
+pip install python-docx pypdf openpyxl
 pip install rapidocr-onnxruntime
 
 # 扫描单个文件（文本/办公文档/图片）
@@ -121,7 +121,7 @@ ai-pc-skill/
 | 层级 | 技术 |
 |------|------|
 | **Agent 大脑** | 本地 LLM（Qwen2.5 / Qwen3 / Phi-4 等，OpenVINO™ / Ollama） |
-| **推理框架** | OpenVINO™ — 本地模型推理（OCR 加速、意图识别、任务规划、报告总结） |
+| **推理框架** | OpenVINO™ — 本地 AI 推理加速（OCR 模型加速、意图识别、任务规划、报告总结） |
 | **检测引擎** | 规则引擎 — 正则 + 关键词匹配（零模型开销） |
 | **运行环境** | Python 3.8+，标准库 + 轻量依赖（docx/pdf/xlsx/ocr） |
 | **Skill 标准** | ModelScope Skills / OpenClaw / MS-Agent 兼容 |

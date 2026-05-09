@@ -96,7 +96,7 @@ allowed-tools:
 支持的文件类型：
 - **文本**: `.txt` `.md` `.env` `.json` `.yaml` `.yml` `.csv`
 - **办公文档**: `.docx` `.pdf` `.xlsx`
-- **图片 (V0.3 OCR)**: `.png` `.jpg` `.jpeg` `.bmp` `.tiff` `.webp`
+- **图片 (V0.3 OCR)**: `.png` `.jpg` `.jpeg` `.bmp` `.tiff` `.tif` `.webp`
 
 ### Step 2: 调用检测脚本
 
@@ -270,7 +270,7 @@ python /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/sk
 | "OCR 引擎不可用" | 未安装 rapidocr-onnxruntime | 执行 `pip install rapidocr-onnxruntime` |
 | "OCR 识别失败" | 图片质量差或不含文字 | 检查图片清晰度，或图片确实不含文字 |
 | "文件不存在" | 路径错误或文件被删除 | 确认文件路径正确，使用绝对路径或相对于 scripts/ 目录的相对路径 |
-| "文件超过 10MB" | 文件太大 | MVP 限制单文件 10MB，可拆分文件或只检查关键部分 |
+| "文件超过 10MB" | 文件太大 | 当前版本限制单文件 10MB，可拆分文件或只检查关键部分 |
 | 检测结果为空 | 文件确实不包含已知敏感信息 | 可手动检查是否包含业务特有的敏感字段 |
 
 ## 扩展说明
@@ -287,19 +287,22 @@ python /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/sk
 | 版本 | 依赖 |
 |------|------|
 | V0.1 | Python 标准库即可（txt/md/env/json/yaml/csv） |
-| V0.2 | 额外需要 `python-docx`、`pypdf`、`openpyxl`、`reportlab`（Office/PDF 解析） |
+| V0.2 | 额外需要 `python-docx`、`pypdf`、`openpyxl`（Office/PDF 解析） |
 | V0.3 | 额外需要 `rapidocr-onnxruntime`（图片 OCR，支持 OpenVINO 加速） |
 
 安装依赖：
 ```bash
 # 基础 + Office/PDF
-pip install python-docx pypdf openpyxl reportlab
+pip install python-docx pypdf openpyxl
 
 # V0.3 图片 OCR
 pip install rapidocr-onnxruntime
 
 # AI PC 上启用 OpenVINO 加速（可选）
 pip install openvino
+
+# 生成 demo PDF 文件（可选开发依赖）
+pip install reportlab
 ```
 
 ### 与 AI PC 的关系
@@ -307,6 +310,6 @@ pip install openvino
 此 Skill 专为 AI PC 场景设计：
 - **本地运行** — 不需要网络连接，文件不出电脑，保护隐私
 - **AI 工具调用** — V0.3 驱动本地 OCR 模型提取图片文字，符合赛题"驱动本地 AI 工具调用"要求
-- **OpenVINO 加速预留** — OCR 引擎检测 OpenVINO 可用性，在 Intel AI PC 上可启用 NPU/GPU 异构加速
+- **OpenVINO 加速预留** — OCR 引擎已预留 OpenVINO 加速接口，在 Intel AI PC 上安装 OpenVINO 后可切换 NPU/GPU 异构推理
 - **轻量规则引擎** — 敏感检测基于确定性正则规则，零模型推理开销，CPU 即可流畅运行
 - **本地 LLM 扩展预留** — V1.0 可通过 OpenVINO 运行本地大模型，用于意图理解、任务规划和报告生成，检测层仍保持规则引擎以保证速度和确定性
