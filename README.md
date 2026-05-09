@@ -23,6 +23,10 @@
 面向 AI PC 的 Agent Skill 集合。利用端侧算力（CPU + GPU + NPU），让文件不出电脑就能完成隐私检查、安全审查等敏感任务。
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/AI-PC-Skill-Collection-Poster.png" alt="AI PC Skill Collection Poster" width="800">
+</p>
+
 ---
 
 ## ✨ 核心理念
@@ -72,13 +76,9 @@ Agent：调用 scan_privacy_file → 给出外发建议
 
 ## 📦 已收录 Skills
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/AI-PC-Skill-Collection-Poster.png" alt="AI PC Skill Collection Poster" width="800">
-</p>
-
 | Skill | 描述 | 版本 | 标签 |
 |-------|------|------|------|
-| <img src="https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/AI-PC-Skill-Collection-Logo.png" width="24"> [local-privacy-inspector](./skills/local-privacy-inspector/) | 本地隐私数据检查 Skill，在文件外发前检测敏感信息并生成脱敏报告 | V0.2 | `AIPC` `privacy` `security` |
+| [local-privacy-inspector](./skills/local-privacy-inspector/) | 本地隐私数据检查 Skill，在文件外发前检测敏感信息并生成脱敏报告 | V0.2 | `AIPC` `privacy` `security` |
 
 ### local-privacy-inspector 能力
 
@@ -117,8 +117,9 @@ ai-pc-skill/
 
 | 层级 | 技术 |
 |------|------|
-| **Agent 大脑** | Qwen3.6-35B-A3B（本地 Ollama / 线上 API） |
-| **推理框架** | OpenVINO™（V0.3 OCR 阶段接入） |
+| **Agent 大脑** | Qwen3.6-35B-A3B（OpenVINO™ 本地 / Ollama 本地 / 线上 API） |
+| **推理框架** | OpenVINO™ — 本地模型推理（意图识别、任务规划、报告总结） |
+| **检测引擎** | 规则引擎 — 正则 + 关键词匹配（零模型开销） |
 | **运行环境** | Python 3.8+，纯标准库 + 轻量依赖 |
 | **Skill 标准** | ModelScope Skills / OpenClaw / MS-Agent 兼容 |
 
