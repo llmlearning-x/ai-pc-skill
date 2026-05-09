@@ -281,11 +281,14 @@ elif 发现 邮箱 / 姓名 / 固定电话:
 
 ```
 demo/
-├── .env              # 开发者密钥场景
-├── config.yaml       # 生产配置场景
-├── meeting_notes.md  # 会议纪要场景
-├── customer_list.csv # 客户清单场景
-└── normal_note.txt   # 安全文件对照
+├── .env                      # 开发者密钥场景
+├── config.yaml               # 生产配置场景
+├── meeting_notes.md          # 会议纪要场景
+├── customer_list.csv         # 客户清单场景
+├── normal_note.txt           # 安全文件对照
+├── demo_contract.docx        # 合同外发场景 (V0.2)
+├── demo_resume.pdf           # 简历投递场景 (V0.2)
+└── demo_budget.xlsx          # 预算表格场景 (V0.2)
 ```
 
 ### 测试 1：.env 文件（高风险）
@@ -380,7 +383,46 @@ $ python scripts/skill.py demo/config.yaml
   - 如密钥已上传公开仓库，请立即轮换
 ```
 
-### 测试 4：安全文件（低风险）
+### 测试 4：简历 PDF（高风险）
+
+```bash
+$ python scripts/skill.py demo/demo_resume.pdf
+
+风险等级: 🔴 高风险
+发现敏感项: 4 个
+
+  🔴 高风险: 1
+  🟡 中风险: 2
+  🟢 低风险: 1
+
+发现的敏感信息:
+  1. 🔴 [身份证号] 320***********001X
+  2. 🟡 [手机号] 138****0000
+  3. 🟢 [邮箱] z****@test.cn
+  4. 🟡 [项目编号] PR****01
+```
+
+### 测试 5：合同 Word（中风险）
+
+```bash
+$ python scripts/skill.py demo/demo_contract.docx
+
+风险等级: 🟡 中风险
+发现敏感项: 6 个
+
+  🔴 高风险: 0
+  🟡 中风险: 6
+
+发现的敏感信息:
+  1. 🟡 [手机号] 138****5678
+  2. 🟡 [手机号] 139****9999
+  3. 🟡 [统一社会信用代码] 913201************
+  4. 🟡 [合同金额] **** 万元
+  5. 🟡 [项目编号] ED****01
+  6. 🟡 [项目编号] Ed****ha
+```
+
+### 测试 6：安全文件（低风险）
 
 ```bash
 $ python scripts/skill.py demo/normal_note.txt
@@ -475,7 +517,7 @@ Agent 不仅返回了检测结果，还针对**"外发"这个具体场景**给�
 
 | 版本 | 目标 |
 |------|------|
-| **V0.2** | 支持 docx/pdf/xlsx 解析，覆盖更多办公场景 |
+| **V0.2** | ✅ 支持 docx/pdf/xlsx 解析，覆盖更多办公场景 |
 | **V0.3** | 接入 OpenVINO OCR，支持图片和扫描版 PDF |
 | **V1.0** | 接入本地 Qwen3.6-35B-A3B，支持自然语言任务输入和场景化智能建议 |
 
@@ -485,7 +527,7 @@ Agent 不仅返回了检测结果，还针对**"外发"这个具体场景**给�
 
 - **项目名称**: Local Privacy Inspector Skill
 - **项目类型**: AI PC Agent Skill
-- **代码仓库**: [GitHub 链接]
+- **代码仓库**: [github.com/llmlearning-x/ai-pc-skill](https://github.com/llmlearning-x/ai-pc-skill)
 - **适用场景**: 文件外发前检查、代码上传前检查、合同共享前检查、简历投递前检查
 - **技术栈**: Python 3.8+（纯标准库）
 - **License**: Apache-2.0
