@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1000px;
+  height: 700px;
+  background: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.container {
+  display: flex;
+  gap: 30px;
+  flex: 1;
+}
+.box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.agent-box {
+  width: 220px;
+  border: 2px solid #e94560;
+}
+.agent-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #e94560;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.agent-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+.arrow-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.arrow {
+  font-size: 28px;
+  color: #999;
+}
+.arrow-label {
+  font-size: 12px;
+  color: #999;
+  writing-mode: vertical-rl;
+}
+.skill-box {
+  flex: 1;
+  border: 2px solid #0f3460;
+}
+.skill-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f3460;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.tool-item {
+  background: #f0f4f8;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+}
+.tool-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+.tool-fn {
+  font-size: 12px;
+  color: #888;
+}
+.bottom-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  padding: 16px;
+  background: #e94560;
+  border-radius: 12px;
+  color: #fff;
+}
+.flow-item {
+  font-size: 14px;
+  font-weight: 500;
+}
+.flow-arrow {
+  font-size: 18px;
+}
+</style>
+</head>
+<body>
+<div class="title">Local Privacy Inspector — 系统架构</div>
+<div class="container">
+  <div class="box agent-box">
+    <div class="agent-title">🧠 Agent 大脑</div>
+    <div class="agent-desc">
+      Qwen3.6-35B-A3B<br><br>
+      • 理解用户自然语言请求<br>
+      • 判断是否需要调用工具<br>
+      • 基于工具结果生成建议<br>
+      • 解释风险和处理方案
+    </div>
+  </div>
+  <div class="arrow-col">
+    <div class="arrow">→</div>
+    <div class="arrow-label">Function Calling</div>
+  </div>
+  <div class="box skill-box">
+    <div class="skill-title">🔒 Local Privacy Inspector Skill</div>
+    <div class="tools-grid">
+      <div class="tool-item">
+        <div class="tool-name">extractor</div>
+        <div class="tool-fn">文本提取</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">detector</div>
+        <div class="tool-fn">规则检测</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">classifier</div>
+        <div class="tool-fn">风险分级</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">masker</div>
+        <div class="tool-fn">脱敏处理</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">reporter</div>
+        <div class="tool-fn">报告生成</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">skill.py</div>
+        <div class="tool-fn">端到端封装</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bottom-flow">
+  <span class="flow-item">📁 用户指定文件</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-item">🔍 本地检测</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-item">📊 脱敏报告</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-item">💡 处理建议</span>
+</div>
+</body>
+</html>

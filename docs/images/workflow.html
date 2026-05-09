@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  height: 1100px;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+  padding: 50px;
+}
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: center;
+}
+.step {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 700px;
+}
+.step-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0f3460;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-content {
+  flex: 1;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 18px 24px;
+  border-left: 4px solid #e94560;
+}
+.step-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+}
+.step-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+.connector {
+  width: 2px;
+  height: 30px;
+  background: #ddd;
+  margin-left: 21px;
+}
+.output-box {
+  margin-top: 30px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 16px;
+  padding: 30px;
+  color: #fff;
+}
+.output-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.output-item {
+  font-size: 15px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.output-item:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+<div class="title">隐私检查工作流程</div>
+<div class="flow">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <div class="step-title">用户输入</div>
+      <div class="step-desc">指定单个文件路径（txt / md / docx / pdf / xlsx 等）</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <div class="step-title">文本提取（extractor）</div>
+      <div class="step-desc">根据文件类型解析并提取纯文本内容</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <div class="step-title">敏感检测（detector）</div>
+      <div class="step-desc">正则规则引擎识别 18+ 种敏感信息类型</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <div class="step-title">脱敏处理（masker）</div>
+      <div class="step-desc">对所有命中结果进行默认脱敏，避免二次泄露</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <div class="step-title">风险分级（classifier）</div>
+      <div class="step-desc">按高/中/低/提示四级分类，生成处理建议</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-content">
+      <div class="step-title">报告输出（reporter）</div>
+      <div class="step-desc">生成 Markdown / JSON 格式的本地隐私检查报告</div>
+    </div>
+  </div>
+</div>
+<div class="output-box">
+  <div class="output-title">📄 报告包含</div>
+  <div class="output-item">• 扫描概览（文件信息、风险等级、发现数量）</div>
+  <div class="output-item">• 风险统计（高/中/低分级数量）</div>
+  <div class="output-item">• 敏感信息详情（脱敏展示 + 行号 + 上下文 + 建议）</div>
+  <div class="output-item">• 安全声明（本地完成、未上传、未修改原文件）</div>
+</div>
+</body>
+</html>
