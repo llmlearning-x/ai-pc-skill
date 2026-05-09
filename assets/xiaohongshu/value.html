@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  height: 1200px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+  color: #1a1a2e;
+  padding: 60px;
+  position: relative;
+}
+.header {
+  font-size: 52px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.sub {
+  font-size: 28px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.compare {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.col {
+  flex: 1;
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.col-header {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid #eee;
+}
+.col-bad .col-header { color: #999; border-color: #ddd; }
+.col-good .col-header { color: #e94560; border-color: #e94560; }
+.col-item {
+  font-size: 24px;
+  color: #555;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 1.5;
+}
+.col-item:last-child { border-bottom: none; }
+.col-bad .col-item { color: #999; }
+.col-good .col-item { color: #333; }
+.badge {
+  display: inline-block;
+  background: #e94560;
+  color: #fff;
+  font-size: 20px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.bottom-cta {
+  position: absolute;
+  bottom: 50px;
+  left: 60px;
+  right: 60px;
+  background: linear-gradient(90deg, #1a1a2e, #16213e);
+  color: #fff;
+  padding: 36px;
+  border-radius: 20px;
+  text-align: center;
+}
+.cta-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.cta-text {
+  font-size: 24px;
+  color: #aaa;
+}
+</style>
+</head>
+<body>
+<div class="header">💡 为什么选本地 AI？</div>
+<div class="sub">AI PC 不是噱头，是真能解决"不能上云"的问题</div>
+
+<div class="compare">
+  <div class="col col-bad">
+    <div class="col-header">☁️ 云端检查</div>
+    <div class="col-item">❌ 需要先上传文件</div>
+    <div class="col-item">❌ 按次/按量计费</div>
+    <div class="col-item">❌ 依赖网络连接</div>
+    <div class="col-item">❌ 扫描范围不可控</div>
+  </div>
+  <div class="col col-good">
+    <div class="col-header">💻 AI PC 本地<span class="badge">WIN</span></div>
+    <div class="col-item">✅ 文件不出电脑</div>
+    <div class="col-item">✅ 零 API 成本</div>
+    <div class="col-item">✅ 离线可用</div>
+    <div class="col-item">✅ 只扫你指定的文件</div>
+  </div>
+</div>
+
+<div class="bottom-cta">
+  <div class="cta-title">🎯 AI PC 最适合的场景</div>
+  <div class="cta-text">不是普通聊天，是处理"不适合上传云端"的本地任务</div>
+</div>
+</body>
+</html>

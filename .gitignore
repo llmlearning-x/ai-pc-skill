@@ -35,3 +35,10 @@ privacy_report_*.json
 # Test artifacts
 test_output/
 temp/
+
+# Secrets & API Keys
+*.env
+.env.*
+!demo/.env
+secrets.json
+config.local.*

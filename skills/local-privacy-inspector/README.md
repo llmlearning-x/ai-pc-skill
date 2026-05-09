@@ -54,11 +54,17 @@ python scripts/skill.py demo/config.yaml --format json
 
 ### 使用方式二：Agent 自然语言交互
 
-```bash
-# Agent 模式（需要配置 API Key）
-python scripts/test_agent.py "帮我检查 demo/.env 有没有敏感信息"
-python scripts/test_agent.py "我想把 meeting_notes.md 发给客户，先帮我看看"
+在支持 Function Calling 的 Agent 工具中（如 Claude、ChatGPT、Cursor 等），配置 `scan_privacy_file` 工具后即可通过自然语言调用：
+
 ```
+用户：帮我检查 demo/.env 有没有敏感信息
+Agent：调用 scan_privacy_file(demo/.env) → 返回风险报告
+
+用户：我想把 meeting_notes.md 发给客户，先帮我看看
+Agent：调用 scan_privacy_file(demo/meeting_notes.md) → 给出外发建议
+```
+
+> 无需在 Skill 中配置 API Key，由用户的 Agent 客户端管理模型连接。
 
 ## 📁 项目结构（ModelScope Skill 规范）
 
@@ -68,7 +74,6 @@ local_privacy_inspector/
 ├── README.md                         # 项目说明
 ├── scripts/                          # 可执行脚本
 │   ├── skill.py                      # CLI 主入口
-│   ├── test_agent.py                 # Agent 驱动测试
 │   ├── models.py                     # 数据模型
 │   ├── extractor.py                  # 文件文本提取
 │   ├── detector.py                   # 敏感信息检测引擎

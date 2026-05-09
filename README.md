@@ -60,8 +60,9 @@ python scripts/skill.py demo/.env
 python scripts/skill.py demo/demo_contract.docx
 python scripts/skill.py demo/demo_resume.pdf
 
-# Agent 驱动模式（需要配置 API Key）
-python scripts/test_agent.py "帮我检查 demo/.env 有没有敏感信息"
+# Agent 驱动模式（在支持 Function Calling 的 Agent 工具中使用）
+# "帮我检查 demo/.env 有没有敏感信息"
+# "我想把 meeting_notes.md 发给客户，先帮我看看"
 ```
 
 ## 技术栈

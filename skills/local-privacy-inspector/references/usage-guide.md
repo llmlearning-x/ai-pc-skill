@@ -36,10 +36,9 @@ python skill.py ../demo/config.yaml --format json
 
 ### Agent 驱动模式
 
-```bash
-cd scripts
-python test_agent.py "帮我检查 demo/.env 有没有敏感信息"
-```
+在支持 Function Calling 的 Agent 客户端（如 Claude、ChatGPT、Cursor）中，配置 `scan_privacy_file` 工具后，通过自然语言调用即可。
+
+无需在 Skill 中配置 API Key，由用户的 Agent 客户端管理模型连接。
 
 ## 支持的文件类型
 

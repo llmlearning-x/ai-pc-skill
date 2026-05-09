@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  height: 1200px;
+  background: linear-gradient(180deg, #16213e 0%, #1a1a2e 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+  color: #fff;
+  padding: 60px;
+  position: relative;
+}
+.header {
+  font-size: 52px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.sub {
+  font-size: 28px;
+  color: #a0a0a0;
+  margin-bottom: 50px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.item {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 32px;
+}
+.item-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+.item-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.item-desc {
+  font-size: 22px;
+  color: #aaa;
+  line-height: 1.5;
+}
+.item-tag {
+  display: inline-block;
+  background: #e94560;
+  color: #fff;
+  font-size: 18px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-weight: 600;
+}
+.bottom-box {
+  position: absolute;
+  bottom: 50px;
+  left: 60px;
+  right: 60px;
+  background: rgba(233, 69, 96, 0.15);
+  border: 1px solid rgba(233, 69, 96, 0.3);
+  border-radius: 16px;
+  padding: 28px;
+}
+.bottom-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #e94560;
+  margin-bottom: 12px;
+}
+.bottom-text {
+  font-size: 22px;
+  color: #ccc;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+<div class="header">🛡️ 这个 Skill 能做什么？</div>
+<div class="sub">本地运行，不上传，自动脱敏</div>
+
+<div class="grid">
+  <div class="item">
+    <div class="item-icon">📁</div>
+    <div class="item-title">10 种文件格式</div>
+    <div class="item-desc">txt / md / json / csv / docx / pdf / xlsx ...</div>
+  </div>
+  <div class="item">
+    <div class="item-icon">🔍</div>
+    <div class="item-title">18+ 敏感类型</div>
+    <div class="item-desc">手机号 / 身份证 / API Key / 数据库密码 ...</div>
+  </div>
+  <div class="item">
+    <div class="item-icon">📊</div>
+    <div class="item-title">四级风险分级</div>
+    <div class="item-desc">🔴高风险 🟡中风险 🟢低风险 🔵提示</div>
+  </div>
+  <div class="item">
+    <div class="item-icon">🤖</div>
+    <div class="item-title">Agent 驱动</div>
+    <div class="item-desc">自然语言交互，模型自动调用检测</div>
+    <span class="item-tag">Qwen3.6-35B</span>
+  </div>
+</div>
+
+<div class="bottom-box">
+  <div class="bottom-title">✨ 核心亮点</div>
+  <div class="bottom-text">只扫描你指定的单个文件 · 检测结果默认脱敏 · 不修改原文件 · 不上传云端</div>
+</div>
+</body>
+</html>

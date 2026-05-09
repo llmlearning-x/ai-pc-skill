@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  height: 1200px;
+  background: #0d1117;
+  font-family: "SF Mono", Monaco, "Cascadia Code", "PingFang SC", sans-serif;
+  color: #c9d1d9;
+  padding: 50px;
+  position: relative;
+}
+.header {
+  font-size: 44px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.sub {
+  font-size: 26px;
+  color: #8b949e;
+  margin-bottom: 36px;
+}
+.terminal {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 16px;
+  padding: 32px;
+  font-size: 22px;
+  line-height: 1.8;
+}
+.terminal-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.dot { width: 14px; height: 14px; border-radius: 50%; }
+.dot-r { background: #ff5f56; }
+.dot-y { background: #ffbd2e; }
+.dot-g { background: #27c93f; }
+.cmd { color: #7ee787; margin-bottom: 8px; }
+.output { color: #c9d1d9; }
+.risk-high { color: #ff7b72; font-weight: 700; }
+.risk-medium { color: #ffa657; font-weight: 700; }
+.finding { color: #79c0ff; }
+.suggestion { color: #a5d6ff; }
+.divider { border-top: 1px solid #30363d; margin: 16px 0; }
+.emoji { font-family: -apple-system, sans-serif; }
+.bottom {
+  position: absolute;
+  bottom: 40px;
+  left: 50px;
+  right: 50px;
+  text-align: center;
+  font-size: 24px;
+  color: #8b949e;
+}
+</style>
+</head>
+<body>
+<div class="header"><span class="emoji">🖥️</span> 实际扫描效果</div>
+<div class="sub">一行命令，本地检查，秒出结果</div>
+
+<div class="terminal">
+  <div class="terminal-header">
+    <div class="dot dot-r"></div>
+    <div class="dot dot-y"></div>
+    <div class="dot dot-g"></div>
+  </div>
+  <div class="cmd">$ python skill.py demo/.env</div>
+  <div class="divider"></div>
+  <div class="output">
+    <span class="emoji">📁</span> 扫描文件: .env<br>
+    <span class="emoji">⚠️</span> 风险等级: <span class="risk-high">🔴 高风险</span><br>
+    <span class="emoji">📊</span> 发现敏感项: <span class="risk-high">9 个</span><br><br>
+    <span class="finding">  1. 🔴 [API_Key] sk-t****cdef</span><br>
+    <span class="finding">  2. 🔴 [数据库连接串] mysql://admin:****@host/db</span><br>
+    <span class="finding">  3. 🔴 [Password] ****</span><br>
+    <span class="finding">  4. 🟡 [服务器IP] 192.168.*.*</span><br><br>
+    <span class="suggestion">💡 建议: 立即删除明文密钥，使用环境变量管理</span><br>
+    <span class="suggestion">   将 .env 加入 .gitignore</span>
+  </div>
+</div>
+
+<div class="bottom">✅ 原始文件不出电脑 · 检测结果默认脱敏</div>
+</body>
+</html>
