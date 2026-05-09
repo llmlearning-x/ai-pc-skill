@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/AI-PC-Skill-Collection-Logo2.png" alt="AI PC Skill Collection" width="500">
+</p>
+
 # 让敏感文件不出电脑：基于 AI PC 的本地隐私数据检查 Skill
 
 > 本文介绍一个运行在 AI PC 本地的隐私数据检查 Skill，帮助用户在文件外发、上传或共享前，发现文件中的敏感信息并生成脱敏报告。核心原则是：**原始文件不上传，只扫用户指定路径，检测结果默认脱敏。**
@@ -496,6 +500,10 @@ Agent 不仅返回了检测结果，还针对**"外发"这个具体场景**给�
 
 ---
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/AI-PC-Skill-Collection-Poster.png" alt="AI PC Skill Collection 项目海报" width="800">
+</p>
+
 ## 九、总结与展望
 
 ### 核心成果
@@ -519,8 +527,6 @@ Agent 不仅返回了检测结果，还针对**"外发"这个具体场景**给�
 |------|------|
 | **V0.2** | ✅ 支持 docx/pdf/xlsx 解析，覆盖更多办公场景 |
 | **V0.3** | 接入 OpenVINO OCR，支持图片和扫描版 PDF |
-| **V1.0** | 接入本地 Qwen3.6-35B-A3B，支持自然语言任务输入和场景化智能建议 |
-
 ---
 
 ## 附录：项目信息

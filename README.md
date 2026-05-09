@@ -1,4 +1,6 @@
-<h1 align="center">AI PC Skill Collection</h1>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/AI-PC-Skill-Collection-Logo2.png" alt="AI PC Skill Collection" width="600">
+</p>
 
 <p align="center">
   <a href="https://github.com/llmlearning-x/ai-pc-skill">
@@ -70,9 +72,13 @@ Agent：调用 scan_privacy_file → 给出外发建议
 
 ## 📦 已收录 Skills
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/AI-PC-Skill-Collection-Poster.png" alt="AI PC Skill Collection Poster" width="800">
+</p>
+
 | Skill | 描述 | 版本 | 标签 |
 |-------|------|------|------|
-| [local-privacy-inspector](./skills/local-privacy-inspector/) | 本地隐私数据检查 Skill，在文件外发前检测敏感信息并生成脱敏报告 | V0.2 | `AIPC` `privacy` `security` |
+| <img src="https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/AI-PC-Skill-Collection-Logo.png" width="24"> [local-privacy-inspector](./skills/local-privacy-inspector/) | 本地隐私数据检查 Skill，在文件外发前检测敏感信息并生成脱敏报告 | V0.2 | `AIPC` `privacy` `security` |
 
 ### local-privacy-inspector 能力
 
