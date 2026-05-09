@@ -62,9 +62,22 @@ python scripts/skill.py demo/demo_resume.pdf
 python scripts/skill.py demo/demo_id_card.png     # V0.3 图片 OCR
 ```
 
-### Agent 驱动模式
+### Agent 驱动模式（赛事基准环境）
 
-在支持 Function Calling 的 Agent 工具中（Claude、ChatGPT、Cursor 等），配置 `scan_privacy_file` 工具后即可通过自然语言调用：
+赛事方统一使用 **Ollama + Qwen3.6-35B-A3B + QwenPaw/Trae** 作为 Skill 是否可以被 Agent 大脑调用的基准测试环境。
+
+**快速开始：**
+```bash
+# 1. 安装 Ollama 并拉取模型
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull qwen3.6-35b-a3b
+ollama serve
+
+# 2. 在 QwenPaw 或 Trae 中安装 Skill
+# 详见 references/agent-setup-guide.md
+```
+
+在支持 Function Calling 的 Agent 工具中（QwenPaw、Trae、Claude、Cursor 等），配置 `scan_privacy_file` 工具后即可通过自然语言调用：
 
 ```
 用户：帮我检查 demo/.env 有没有敏感信息
@@ -72,9 +85,14 @@ Agent：调用 scan_privacy_file → 返回风险报告
 
 用户：我想把 meeting_notes.md 发给客户，先帮我看看
 Agent：调用 scan_privacy_file → 给出外发建议
+
+用户：这张身份证照片里有敏感信息吗？
+Agent：调用 scan_privacy_file → OCR 提取 → 检测 → 返回报告
 ```
 
 > 无需在 Skill 中配置 API Key，由用户的 Agent 客户端管理模型连接。
+>
+> 详细配置指南见 [`references/agent-setup-guide.md`](./skills/local-privacy-inspector/references/agent-setup-guide.md)
 
 ## 📦 已收录 Skills
 

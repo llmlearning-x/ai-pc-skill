@@ -64,9 +64,11 @@ python scripts/skill.py demo/demo_id_card.png
 python scripts/skill.py demo/config.yaml --format json
 ```
 
-### 使用方式二：Agent 自然语言交互
+### 使用方式二：Agent 自然语言交互（推荐）
 
-在支持 Function Calling 的 Agent 工具中（如 Claude、ChatGPT、Cursor 等），配置 `scan_privacy_file` 工具后即可通过自然语言调用：
+**赛事基准环境**：Ollama + Qwen3.6-35B-A3B + QwenPaw/Trae
+
+在支持 Function Calling 的 Agent 工具中（QwenPaw、Trae、Claude、Cursor 等），配置 `scan_privacy_file` 工具后即可通过自然语言调用：
 
 ```
 用户：帮我检查 demo/.env 有没有敏感信息
@@ -74,9 +76,14 @@ Agent：调用 scan_privacy_file(demo/.env) → 返回风险报告
 
 用户：我想把 meeting_notes.md 发给客户，先帮我看看
 Agent：调用 scan_privacy_file(demo/meeting_notes.md) → 给出外发建议
+
+用户：这张身份证照片能发朋友圈吗？
+Agent：调用 scan_privacy_file(demo/demo_id_card.png) → OCR 提取 → 检测 → 给出建议
 ```
 
 > 无需在 Skill 中配置 API Key，由用户的 Agent 客户端管理模型连接。
+>
+> 📖 **详细配置指南**：[`references/agent-setup-guide.md`](./references/agent-setup-guide.md)
 
 ## 📁 项目结构（ModelScope Skill 规范）
 

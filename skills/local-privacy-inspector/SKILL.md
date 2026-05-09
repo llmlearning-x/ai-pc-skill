@@ -102,6 +102,8 @@ allowed-tools:
 
 执行 `scripts/skill.py` 进行本地扫描。**必须使用绝对路径**调用脚本：
 
+> **赛事基准环境**：在 QwenPaw / Trae 中，Agent 大脑（Qwen3.6-35B-A3B 通过 Ollama 本地部署）会自动调用此脚本。详见 `references/agent-setup-guide.md`。
+
 ```bash
 python /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/skill.py <文件路径>
 ```
@@ -152,6 +154,7 @@ python /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/sk
 
 - `references/detection-rules.md` — 完整检测规则说明
 - `references/usage-guide.md` — 使用指南和常见问题
+- `references/agent-setup-guide.md` — **本地 Agent 环境配置指南**（Ollama + Qwen3.6-35B-A3B + QwenPaw/Trae）
 
 ## 示例
 

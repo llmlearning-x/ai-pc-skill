@@ -125,7 +125,7 @@ DB_PASSWORD=123456
 ```
 用户自然语言请求
       ↓
-Agent 大脑（Qwen3 系列本地模型，如 Qwen3-30B-A3B）
+Agent 大脑（Qwen3.6-35B-A3B）
       ↓
 理解意图 → 确认文件路径 → 调用检测工具
       ↓
@@ -443,7 +443,7 @@ $ python scripts/skill.py demo/normal_note.txt
 
 ## 七、Agent 驱动：让模型理解隐私检查
 
-除了命令行直接扫描，我们还测试了 **Agent 驱动模式**：用 Qwen3 系列本地模型作为 Agent 大脑，通过 Function Calling 调用检测工具。
+除了命令行直接扫描，我们还测试了 **Agent 驱动模式**：用 **Qwen3.6-35B-A3B**（通过 Ollama 本地部署）作为 Agent 大脑，通过 Function Calling 调用检测工具。
 
 ### 交互示例
 
