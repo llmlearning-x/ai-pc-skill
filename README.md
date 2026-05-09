@@ -51,13 +51,15 @@
 git clone https://github.com/llmlearning-x/ai-pc-skill.git
 cd ai-pc-skill/skills/local-privacy-inspector
 
-# 安装 V0.2 办公文档依赖
-pip install python-docx pypdf openpyxl
+# 安装依赖
+pip install python-docx pypdf openpyxl reportlab
+pip install rapidocr-onnxruntime
 
-# 扫描单个文件
+# 扫描单个文件（文本/办公文档/图片）
 python scripts/skill.py demo/.env
 python scripts/skill.py demo/demo_contract.docx
 python scripts/skill.py demo/demo_resume.pdf
+python scripts/skill.py demo/demo_id_card.png     # V0.3 图片 OCR
 ```
 
 ### Agent 驱动模式
@@ -78,15 +80,16 @@ Agent：调用 scan_privacy_file → 给出外发建议
 
 | Skill | 描述 | 版本 | 标签 |
 |-------|------|------|------|
-| [local-privacy-inspector](./skills/local-privacy-inspector/) | 本地隐私数据检查 Skill，在文件外发前检测敏感信息并生成脱敏报告 | V0.2 | `AIPC` `privacy` `security` |
+| [local-privacy-inspector](./skills/local-privacy-inspector/) | 本地隐私数据检查 Skill，在文件外发前检测敏感信息并生成脱敏报告 | V0.3 | `AIPC` `privacy` `security` `OCR` |
 
 ### local-privacy-inspector 能力
 
-- **10 种文件格式**：txt / md / env / json / yaml / csv / docx / pdf / xlsx
+- **10+ 种文件格式**：txt / md / env / json / yaml / csv / docx / pdf / xlsx / png / jpg / jpeg ...
+- **本地 OCR (V0.3)**：驱动 RapidOCR 提取图片中的身份证、银行卡、合同截图、截图密钥等敏感文字，OpenVINO 加速预留
 - **18+ 敏感类型**：手机号 / 身份证号 / API Key / Token / 数据库连接串 / 合同金额 ...
 - **四级风险分级**：🔴 高风险 / 🟡 中风险 / 🟢 低风险 / 🔵 提示
 - **默认脱敏**：所有检测结果脱敏展示，避免二次泄露
-- **本地运行**：零外部依赖，零 API 成本，离线可用
+- **本地运行**：文件不出电脑，零 API 成本，离线可用
 
 ## 🏗️ 项目结构
 
@@ -117,10 +120,10 @@ ai-pc-skill/
 
 | 层级 | 技术 |
 |------|------|
-| **Agent 大脑** | Qwen3.6-35B-A3B（OpenVINO™ 本地 / Ollama 本地 / 线上 API） |
-| **推理框架** | OpenVINO™ — 本地模型推理（意图识别、任务规划、报告总结） |
+| **Agent 大脑** | 本地 LLM（Qwen2.5 / Qwen3 / Phi-4 等，OpenVINO™ / Ollama） |
+| **推理框架** | OpenVINO™ — 本地模型推理（OCR 加速、意图识别、任务规划、报告总结） |
 | **检测引擎** | 规则引擎 — 正则 + 关键词匹配（零模型开销） |
-| **运行环境** | Python 3.8+，纯标准库 + 轻量依赖 |
+| **运行环境** | Python 3.8+，标准库 + 轻量依赖（docx/pdf/xlsx/ocr） |
 | **Skill 标准** | ModelScope Skills / OpenClaw / MS-Agent 兼容 |
 
 ## 🏆 参赛信息

@@ -35,6 +35,7 @@ from masker import mask_value
 from classifier import classify_risk
 from reporter import generate_markdown_report, generate_json_report
 from models import RiskLevel
+from ocr_engine import get_ocr_engine, is_image_file, get_supported_image_extensions
 
 
 def scan_file(file_path: str, output_format: str = "markdown") -> str:
@@ -93,6 +94,22 @@ def scan_file(file_path: str, output_format: str = "markdown") -> str:
     print(f"📁 扫描文件: {file_name}")
     print(f"📂 文件路径: {file_path}")
     print(f"📏 文件大小: {file_size} 字节")
+    
+    # V0.3: 显示 OCR 引擎状态（如果是图片文件）
+    if is_image_file(file_path):
+        ocr = get_ocr_engine()
+        if ocr.is_available:
+            print(f"🖼️  文件类型: 图片 (将使用 OCR 提取文字)")
+            print(f"🔧 OCR 引擎: {ocr.backend_name}")
+            if ocr.openvino_ready:
+                ov_info = ocr.get_openvino_info()
+                print(f"⚡ OpenVINO: 已就绪 (版本 {ov_info.get('version', 'unknown')}, 设备: {', '.join(ov_info.get('devices', []))})")
+            else:
+                print(f"⚡ OpenVINO: 未安装 (当前使用 ONNX Runtime)")
+                print(f"   提示: 在 Intel AI PC 上安装 OpenVINO 可启用 NPU/GPU 加速")
+        else:
+            print(f"❌ OCR 引擎不可用，请执行: pip install rapidocr-onnxruntime")
+            sys.exit(1)
     print()
     
     # 2. 提取文本
@@ -103,6 +120,20 @@ def scan_file(file_path: str, output_format: str = "markdown") -> str:
         sys.exit(1)
     
     print(f"   ✓ 成功提取 {len(text)} 字符")
+    
+    # V0.3: 如果是图片，显示 OCR 提取详情
+    if is_image_file(file_path):
+        # 提取 OCR 元信息行
+        ocr_meta_lines = []
+        content_lines = text.split('\n')
+        for line in content_lines:
+            if line.startswith('# [OCR提取]'):
+                ocr_meta_lines.append(line.replace('# [OCR提取] ', '   • '))
+            elif line.strip() == '':
+                break
+        if ocr_meta_lines:
+            for meta in ocr_meta_lines:
+                print(f"{meta}")
     print()
     
     # 3. 检测敏感信息
@@ -217,6 +248,7 @@ def main():
   python skill.py ./demo/.env
   python skill.py ./demo/meeting_notes.md --format json
   python skill.py ./demo/customer_list.csv
+  python skill.py ./demo/demo_id_card.png        # V0.3 图片 OCR
         """
     )
     parser.add_argument("file_path", help="要扫描的文件路径")

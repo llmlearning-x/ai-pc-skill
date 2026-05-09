@@ -1,14 +1,17 @@
 ---
 name: local-privacy-inspector
 description: 
-  本地隐私数据检查 Skill。帮助用户在文件外发、上传或共享前，
-  检查指定文件中是否包含手机号、身份证号、API Key、Token、
-  数据库连接串、合同金额、客户名称等敏感信息，并生成默认脱敏的风险报告。
+  本地隐私数据检查 Skill (V0.3)。帮助用户在文件外发、上传或共享前，
+  检查指定文件（支持文本、Office、PDF、图片 OCR）中是否包含手机号、
+  身份证号、API Key、Token、数据库连接串、合同金额、客户名称等敏感信息，
+  并生成默认脱敏的风险报告。
+  V0.3 新增图片 OCR 能力：可扫描身份证照片、银行卡照片、合同扫描件、
+  截图中的密钥等图片敏感信息，通过本地 OCR 引擎提取文字后送入规则引擎检测。
   当用户提到"检查文件隐私"、"扫描敏感信息"、"外发前审查"、
-  "代码上传前检查"、"简历隐私检查"时使用此 Skill。
+  "代码上传前检查"、"简历隐私检查"、"图片里有没有敏感信息"时使用此 Skill。
   核心价值：原始文件不出电脑，检测范围由用户主动指定，结果默认脱敏。
-version: 0.1.0
-tags: [privacy, security, AIPC, local-ai, file-scan, sensitive-data]
+version: 0.3.0
+tags: [privacy, security, AIPC, local-ai, file-scan, sensitive-data, OCR, OpenVINO]
 license: Apache-2.0
 author: AI PC Developer
 agent_created: true
@@ -54,7 +57,7 @@ allowed-tools:
 ```
 用户指定文件路径
     ↓
-解析文件内容（txt/md/env/json/yaml/csv）
+解析文件内容（txt/md/env/json/yaml/csv/docx/pdf/xlsx + 图片 OCR）
     ↓
 规则引擎检测敏感信息
     ↓
@@ -91,25 +94,27 @@ allowed-tools:
 询问用户要检查的文件路径，确认文件存在且可访问。
 
 支持的文件类型：
-- `.txt` `.md` `.env` `.json` `.yaml` `.yml` `.csv` `.docx` `.pdf` `.xlsx`
+- **文本**: `.txt` `.md` `.env` `.json` `.yaml` `.yml` `.csv`
+- **办公文档**: `.docx` `.pdf` `.xlsx`
+- **图片 (V0.3 OCR)**: `.png` `.jpg` `.jpeg` `.bmp` `.tiff` `.webp`
 
 ### Step 2: 调用检测脚本
 
 执行 `scripts/skill.py` 进行本地扫描。**必须使用绝对路径**调用脚本：
 
 ```bash
-python /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/scripts/skill.py <文件路径>
+python /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/skill.py <文件路径>
 ```
 
 或指定 JSON 输出格式：
 
 ```bash
-python /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/scripts/skill.py <文件路径> --format json
+python /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/skill.py <文件路径> --format json
 ```
 
 **路径说明：**
 - `<文件路径>` 可以是绝对路径或相对于当前工作目录的路径
-- 脚本路径必须使用绝对路径：`/Users/fanghua/code/ai-pc-skill/local_privacy_inspector/scripts/skill.py`
+- 脚本路径必须使用绝对路径：`/Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/skill.py`
 - 或者使用相对于工作目录的路径：`scripts/skill.py`（仅在当前工作目录为技能根目录时有效）
 
 ### Step 3: 解析结果并生成建议
@@ -156,7 +161,7 @@ python /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/scripts/skill.py 
 
 **执行**:
 ```bash
-python /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/scripts/skill.py /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/demo/.env
+python /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/skill.py /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/demo/.env
 ```
 
 **输出**:
@@ -183,7 +188,7 @@ python /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/scripts/skill.py 
 
 **执行**:
 ```bash
-python /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/scripts/skill.py /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/demo/meeting_notes.md
+python /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/skill.py /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/demo/meeting_notes.md
 ```
 
 **输出**:
@@ -206,11 +211,64 @@ python /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/scripts/skill.py 
   - 隐藏项目编号：替换为通用描述
 ```
 
+### 示例 3: 图片 OCR — 检查身份证/银行卡照片 (V0.3)
+
+**用户**: "我收到一张员工信息登记表的截图，帮我看看有没有敏感信息"
+
+**执行**:
+```bash
+python /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/scripts/skill.py /Users/fanghua/code/ai-pc-skill/skills/local-privacy-inspector/demo/demo_id_card.png
+```
+
+**输出**:
+```
+📁 扫描文件: demo_id_card.png
+📂 文件路径: ../demo/demo_id_card.png
+📏 文件大小: 57070 字节
+🖼️  文件类型: 图片 (将使用 OCR 提取文字)
+🔧 OCR 引擎: rapidocr_onnxruntime
+⚡ OpenVINO: 未安装 (当前使用 ONNX Runtime)
+   提示: 在 Intel AI PC 上安装 OpenVINO 可启用 NPU/GPU 加速
+
+📝 正在提取文件内容...
+   ✓ 成功提取 288 字符
+   • 引擎: rapidocr_onnxruntime
+   • 识别行数: 9
+   • 平均置信度: 0.9804
+   • 耗时: 498.0ms
+
+🔍 正在检测敏感信息...
+
+============================================================
+📊 扫描结果
+============================================================
+
+风险等级: 🔴 高风险
+发现敏感项: 11 个
+
+  🔴 高风险: 6
+  🟡 中风险: 4
+  🟢 低风险: 1
+
+发现的敏感信息:
+  1. 🔴 [身份证号] 310***********1234
+  2. 🟡 [手机号] 138****5678
+  3. 🔴 [API_Key] sk-a****ijkl
+  4. 🔴 [数据库连接串] mysql://admin:****@192.168.1.100:3306
+  5. 🟡 [合同金额] ￥****
+  6. 🟡 [服务器IP] 192.168.*.*
+  ...
+```
+
+**说明**: V0.3 通过本地 OCR 引擎提取图片中的文字，再送入规则引擎检测。身份证照片、银行卡照片、合同扫描件、截图中的密钥等图片敏感信息，现在都能被识别。
+
 ## 故障排查
 
 | 问题 | 原因 | 解决方案 |
 |------|------|---------|
-| "不支持的文件类型" | 文件格式不在支持列表中 | 目前 MVP 只支持 txt/md/env/json/yaml/csv，请将内容复制到支持的格式中再检查 |
+| "不支持的文件类型" | 文件格式不在支持列表中 | 检查文件后缀是否在支持列表中（文本/办公文档/图片） |
+| "OCR 引擎不可用" | 未安装 rapidocr-onnxruntime | 执行 `pip install rapidocr-onnxruntime` |
+| "OCR 识别失败" | 图片质量差或不含文字 | 检查图片清晰度，或图片确实不含文字 |
 | "文件不存在" | 路径错误或文件被删除 | 确认文件路径正确，使用绝对路径或相对于 scripts/ 目录的相对路径 |
 | "文件超过 10MB" | 文件太大 | MVP 限制单文件 10MB，可拆分文件或只检查关键部分 |
 | 检测结果为空 | 文件确实不包含已知敏感信息 | 可手动检查是否包含业务特有的敏感字段 |
@@ -219,13 +277,36 @@ python /Users/fanghua/code/ai-pc-skill/local_privacy_inspector/scripts/skill.py 
 
 ### 后续版本规划
 
-- **V0.2**: 支持 docx/pdf/xlsx 解析
-- **V0.3**: 支持图片 OCR（配合 OpenVINO 加速）
-- **V1.0**: 接入本地模型（Qwen3.6-35B-A3B），支持自然语言任务输入和场景化建议
+- **V0.2** ✅: 已支持 docx/pdf/xlsx 解析（需要 `python-docx`、`pypdf`、`openpyxl`）
+- **V0.3** ✅: 已支持图片 OCR 扫描（需要 `rapidocr-onnxruntime`，OpenVINO 加速预留）
+- **V0.4**: 支持多文件/文件夹批量扫描，递归扫描整个目录
+- **V1.0**: 接入本地 LLM（如 Qwen2.5 / Qwen3 系列），通过 OpenVINO 运行，支持自然语言任务输入和场景化建议
+
+### 依赖说明
+
+| 版本 | 依赖 |
+|------|------|
+| V0.1 | Python 标准库即可（txt/md/env/json/yaml/csv） |
+| V0.2 | 额外需要 `python-docx`、`pypdf`、`openpyxl`、`reportlab`（Office/PDF 解析） |
+| V0.3 | 额外需要 `rapidocr-onnxruntime`（图片 OCR，支持 OpenVINO 加速） |
+
+安装依赖：
+```bash
+# 基础 + Office/PDF
+pip install python-docx pypdf openpyxl reportlab
+
+# V0.3 图片 OCR
+pip install rapidocr-onnxruntime
+
+# AI PC 上启用 OpenVINO 加速（可选）
+pip install openvino
+```
 
 ### 与 AI PC 的关系
 
 此 Skill 专为 AI PC 场景设计：
-- **本地运行** — 不需要网络连接，保护隐私
-- **轻量化** — 纯 Python 标准库，零外部依赖
-- **NPU/GPU 加速预留** — OCR 版本可接入 OpenVINO 利用异构算力
+- **本地运行** — 不需要网络连接，文件不出电脑，保护隐私
+- **AI 工具调用** — V0.3 驱动本地 OCR 模型提取图片文字，符合赛题"驱动本地 AI 工具调用"要求
+- **OpenVINO 加速预留** — OCR 引擎检测 OpenVINO 可用性，在 Intel AI PC 上可启用 NPU/GPU 异构加速
+- **轻量规则引擎** — 敏感检测基于确定性正则规则，零模型推理开销，CPU 即可流畅运行
+- **本地 LLM 扩展预留** — V1.0 可通过 OpenVINO 运行本地大模型，用于意图理解、任务规划和报告生成，检测层仍保持规则引擎以保证速度和确定性

@@ -4,7 +4,10 @@
 
 - **操作系统**: macOS / Linux / Windows
 - **Python 版本**: 3.8+
-- **依赖**: 无（纯标准库实现）
+- **依赖**:
+  - V0.1: 纯 Python 标准库
+  - V0.2: `python-docx`、`pypdf`、`openpyxl`（Office/PDF 解析）
+  - V0.3: `rapidocr-onnxruntime`（图片 OCR）
 
 ## 安装
 
@@ -13,7 +16,14 @@ git clone <your-repo-url>
 cd local_privacy_inspector
 ```
 
-无需安装额外依赖，直接可用。
+```bash
+# V0.2 + V0.3 依赖
+pip install python-docx pypdf openpyxl reportlab
+pip install rapidocr-onnxruntime
+
+# AI PC 上启用 OpenVINO 加速（可选）
+pip install openvino
+```
 
 ## 基本用法
 
@@ -53,11 +63,19 @@ python skill.py ../demo/config.yaml --format json
 | Word | `.docx` | 提取段落文本 | V0.2 |
 | PDF | `.pdf` | 提取页面文本 | V0.2 |
 | Excel | `.xlsx` | 读取单元格文本 | V0.2 |
+| 图片 OCR | `.png` `.jpg` `.jpeg` `.bmp` `.tiff` `.webp` | OCR 提取文字后检测 | V0.3 |
 
-V0.2 新增办公文档支持，需要安装依赖：
+各版本依赖安装：
 
 ```bash
-pip install python-docx pypdf openpyxl
+# V0.2 办公文档
+pip install python-docx pypdf openpyxl reportlab
+
+# V0.3 图片 OCR
+pip install rapidocr-onnxruntime
+
+# AI PC OpenVINO 加速（可选）
+pip install openvino
 ```
 
 ## 输出说明
@@ -86,7 +104,7 @@ privacy_report_<文件名>_<时间戳>.json    # JSON 格式（指定 --format j
 A: MVP 版本只支持单文件扫描。如需批量扫描，可以写一个简单的 shell 脚本循环调用：
 
 ```bash
-for file in folder/*.{txt,md,env,json,yaml,yml,csv}; do
+for file in folder/*.{txt,md,env,json,yaml,yml,csv,docx,pdf,xlsx,png,jpg,jpeg}; do
     python skill.py "$file" 2>/dev/null
 done
 ```

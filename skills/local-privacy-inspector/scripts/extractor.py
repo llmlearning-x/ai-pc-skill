@@ -12,7 +12,8 @@ from typing import Optional, Tuple
 # 支持的文件类型
 SUPPORTED_EXTENSIONS = {
     '.txt', '.md', '.env', '.json', '.yaml', '.yml', '.csv',
-    '.docx', '.pdf', '.xlsx'
+    '.docx', '.pdf', '.xlsx',
+    '.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.tif', '.webp',  # V0.3 OCR
 }
 
 
@@ -65,6 +66,8 @@ def extract_text(file_path: str) -> Tuple[Optional[str], Optional[str]]:
             return _extract_pdf(file_path), None
         elif ext == '.xlsx':
             return _extract_xlsx(file_path), None
+        elif ext in {'.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.tif', '.webp'}:
+            return _extract_image(file_path), None
         else:
             return None, f"暂不支持的文件格式: {ext}"
     except Exception as e:
@@ -178,6 +181,28 @@ def _extract_xlsx(file_path: str) -> str:
             if row_text.strip():
                 lines.append(row_text)
     return '\n'.join(lines)
+
+
+def _extract_image(file_path: str) -> str:
+    """使用 OCR 从图片中提取文本 (V0.3)"""
+    try:
+        from ocr_engine import extract_text_from_image
+    except ImportError:
+        raise ImportError("解析图片需要 OCR 引擎，请执行: pip install rapidocr-onnxruntime")
+    
+    ocr_result = extract_text_from_image(file_path)
+    if ocr_result.error:
+        raise RuntimeError(f"OCR 识别失败: {ocr_result.error}")
+    
+    # 在文本头部添加 OCR 元信息注释，便于追溯
+    header_lines = [
+        f"# [OCR提取] 引擎: {ocr_result.engine}",
+        f"# [OCR提取] 识别行数: {ocr_result.line_count}",
+        f"# [OCR提取] 平均置信度: {ocr_result.confidence_avg}",
+        f"# [OCR提取] 耗时: {ocr_result.elapsed_ms:.1f}ms",
+        "",
+    ]
+    return '\n'.join(header_lines) + ocr_result.text
 
 
 def get_file_type(file_path: str) -> str:

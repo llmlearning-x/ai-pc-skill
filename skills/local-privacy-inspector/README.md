@@ -20,16 +20,22 @@
 ### 环境要求
 
 - Python 3.8+
-- 无需额外依赖（纯标准库实现）
+- V0.1 仅需 Python 标准库
+- V0.2 需要 `python-docx`、`pypdf`、`openpyxl`（Office/PDF 解析）
+- V0.3 需要 `rapidocr-onnxruntime`（图片 OCR）
 
 ### 安装
 
 ```bash
 git clone <repo-url>
-cd local_privacy_inspector
+cd local-privacy-inspector
 
-# V0.2 新增办公文档支持，需要安装依赖
-pip install python-docx pypdf openpyxl
+# V0.2 办公文档 + V0.3 图片 OCR
+pip install python-docx pypdf openpyxl reportlab
+pip install rapidocr-onnxruntime
+
+# AI PC 上启用 OpenVINO 加速（可选）
+pip install openvino
 ```
 
 ### 使用方式一：命令行直接扫描
@@ -47,6 +53,9 @@ python scripts/skill.py demo/customer_list.csv
 python scripts/skill.py demo/demo_contract.docx
 python scripts/skill.py demo/demo_resume.pdf
 python scripts/skill.py demo/demo_budget.xlsx
+
+# 图片 OCR（V0.3 新增）— 身份证照片、银行卡、合同扫描件、截图密钥
+python scripts/skill.py demo/demo_id_card.png
 
 # JSON 格式输出
 python scripts/skill.py demo/config.yaml --format json
@@ -69,13 +78,14 @@ Agent：调用 scan_privacy_file(demo/meeting_notes.md) → 给出外发建议
 ## 📁 项目结构（ModelScope Skill 规范）
 
 ```
-local_privacy_inspector/
+local-privacy-inspector/
 ├── SKILL.md                          # ⭐ Skill 核心入口文件
 ├── README.md                         # 项目说明
 ├── scripts/                          # 可执行脚本
 │   ├── skill.py                      # CLI 主入口
 │   ├── models.py                     # 数据模型
-│   ├── extractor.py                  # 文件文本提取
+│   ├── extractor.py                  # 文件文本提取（V0.3 新增图片 OCR）
+│   ├── ocr_engine.py                 # V0.3 OCR 引擎（RapidOCR + OpenVINO 双后端）
 │   ├── detector.py                   # 敏感信息检测引擎
 │   ├── masker.py                     # 脱敏处理器
 │   ├── classifier.py                 # 风险分级
@@ -99,6 +109,7 @@ local_privacy_inspector/
 |------|-----------|
 | V0.1 (MVP) | `.txt` `.md` `.env` `.json` `.yaml` `.yml` `.csv` |
 | V0.2 | `.docx` `.pdf` `.xlsx` |
+| V0.3 | `.png` `.jpg` `.jpeg` `.bmp` `.tiff` `.webp`（图片 OCR） |
 
 ### 检测的敏感信息
 
@@ -162,10 +173,11 @@ local_privacy_inspector/
 - 💻 **代码上传前检查** — API Key、.env、数据库连接串
 - 📋 **简历投递前检查** — 身份证号、详细住址
 - 📝 **会议纪要共享前检查** — 内部项目代号、预算金额
+- 🖼️ **图片敏感信息检查** — 身份证照片、银行卡照片、合同扫描件、截图中的密钥（V0.3 OCR）
 
 ## 🏷️ 标签
 
-`AIPC` `privacy` `security` `local-ai` `file-scan`
+`AIPC` `privacy` `security` `local-ai` `file-scan` `OCR` `OpenVINO`
 
 ## 📜 License
 
