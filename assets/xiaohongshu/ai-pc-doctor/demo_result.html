@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  height: 1200px;
+  background: linear-gradient(180deg, #203a43 0%, #0f2027 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+  color: #fff;
+  padding: 60px;
+  position: relative;
+}
+.header {
+  font-size: 52px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.sub {
+  font-size: 28px;
+  color: #a0a0a0;
+  margin-bottom: 40px;
+}
+.terminal {
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.term-bar {
+  background: rgba(255,255,255,0.08);
+  padding: 14px 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.dot { width: 16px; height: 16px; border-radius: 50%; }
+.d1 { background: #ff5f57; }
+.d2 { background: #febc2e; }
+.d3 { background: #28c840; }
+.term-title { color: #8b949e; font-size: 20px; margin-left: 12px; }
+.term-body {
+  padding: 28px 32px;
+  font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+  font-size: 21px;
+  line-height: 1.75;
+  color: #c9d1d9;
+  white-space: pre-wrap;
+}
+.cmd { color: #36d1dc; font-weight: 700; }
+.ok { color: #3fb950; }
+.warn { color: #d29922; }
+.kv { color: #8b949e; }
+.hl { color: #f0f6fc; font-weight: 700; }
+.score-box {
+  margin-top: 36px;
+  background: rgba(54, 209, 220, 0.12);
+  border: 1px solid rgba(54, 209, 220, 0.4);
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.score-num {
+  font-size: 72px;
+  font-weight: 800;
+  color: #36d1dc;
+}
+.score-text {
+  font-size: 24px;
+  color: #ccc;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+<div class="header">⚡ 实测效果</div>
+<div class="sub">一条命令，生成完整的本机 AI 体检报告</div>
+
+<div class="terminal">
+  <div class="term-bar">
+    <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div>
+    <div class="term-title">ai-pc-doctor — standard 模式</div>
+  </div>
+  <div class="term-body"><span class="cmd">$ python scripts/doctor.py --mode standard</span>
+
+<span class="kv">[1/5] 系统检测</span>      <span class="ok">✔</span> Core Ultra 7 · 32GB · Win11
+<span class="kv">[2/5] OpenVINO</span>       <span class="ok">✔</span> 2025.x · 设备: CPU/GPU/NPU
+<span class="kv">[3/5] Smoke Test</span>     <span class="ok">✔ CPU</span>  <span class="ok">✔ GPU</span>  <span class="warn">✘ NPU 驱动异常</span>
+<span class="kv">[4/5] Benchmark</span>      <span class="hl">CPU 3.2ms · GPU 1.1ms</span> <span class="kv">(中位延迟)</span>
+<span class="kv">[5/5] 容量估算</span>        <span class="hl">7B INT4 ✅ 推荐 · 14B INT8 ⚠️ 勉强</span>
+
+<span class="ok">报告已生成 → output/standard/AI_PC_Readiness_Report.html</span></div>
+</div>
+
+<div class="score-box">
+  <div class="score-num">87</div>
+  <div class="score-text">AI PC Readiness Score<br>含模型推荐清单 + 部署建议 + 交互式 HTML 报告</div>
+</div>
+</body>
+</html>
