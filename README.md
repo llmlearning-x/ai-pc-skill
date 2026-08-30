@@ -116,22 +116,31 @@ Agent：调用 scan_privacy_file → OCR 提取 → 检测 → 返回报告
 ai-pc-skill/
 ├── README.md                          # 项目总览
 ├── AGENTS.md                          # Agent 开发指南
-├── 需求文档.md                         # 需求文档 & 设计参考
-├── docs/
-│   ├── article.md                     # 魔搭研习社技术文章
-│   └── images/                        # 文章配图
-│       ├── architecture.png
-│       ├── workflow.png
-│       └── risk-levels.png
+├── docs/                              # 技术文档（按 Skill 分目录）
+│   ├── local-privacy-inspector/
+│   │   ├── article.md                 # 魔搭研习社技术文章
+│   │   ├── 需求文档.md                 # 需求文档 & 设计参考
+│   │   └── images/                    # 文章配图
+│   └── ai-pc-doctor/
+│       ├── article.md                 # AI PC Doctor 技术文章
+│       └── images/                    # 文章配图
 ├── assets/
-│   └── xiaohongshu/                   # 小红书营销素材
+│   └── xiaohongshu/                   # 小红书营销素材（按 Skill 分目录）
+│       ├── local-privacy-inspector/
+│       └── ai-pc-doctor/
 ├── skills/
-│   └── local-privacy-inspector/       # 本地隐私检查 Skill
-│       ├── SKILL.md                   # Skill 核心入口
-│       ├── README.md                  # 使用说明
-│       ├── scripts/                   # 可执行脚本
-│       ├── references/                # 参考文档
-│       └── demo/                      # 测试用例
+│   ├── local-privacy-inspector/       # 本地隐私数据检查 Skill
+│   │   ├── SKILL.md                   # Skill 核心入口
+│   │   ├── README.md                  # 使用说明
+│   │   ├── scripts/                   # 可执行脚本
+│   │   ├── references/                # 参考文档
+│   │   └── demo/                      # 测试用例
+│   └── ai-pc-doctor/                  # AI PC 部署体检与性能评测 Skill
+│       ├── SKILL.md
+│       ├── README.md
+│       ├── scripts/
+│       ├── references/
+│       └── demo/
 └── .gitignore
 ```
 

@@ -116,7 +116,7 @@ Skill 提供 quick / standard / full 三档模式：
 
 一个值得分享的工程细节：当用户没说选哪个模式时，Agent 不会擅自套默认值，而是**先用表格渲染三模式对比，再提问收口**——因为纯文本提问里用户根本分不清三档差异。这是「Skill 不只是脚本，更是 Agent 交互设计」的一个具体体现。
 
-![WorkBuddy 中的模式选择交互：先渲染对比表，再提问收口](images/ai-pc-doctor/Snipaste_2026-08-30_17-59-05.png)
+![WorkBuddy 中的模式选择交互：先渲染对比表，再提问收口](images/Snipaste_2026-08-30_17-59-05.png)
 
 ### 3.3 OpenVINO 深度集成：不只是 import 一下
 
@@ -142,9 +142,9 @@ Skill 提供 quick / standard / full 三档模式：
 - `report.md`：人读版本；
 - `AI_PC_Readiness_Report.html`：自包含单页 Dashboard（无 CDN 依赖，离线可打开），包含设备概览、Readiness 评分、OpenVINO 状态、设备兼容性、性能基准、生成式 AI 性能、模型容量评估、部署建议、问题与修复九个板块。
 
-![体检报告：OpenVINO 状态、设备兼容性与性能基准（standard 模式实测）](images/ai-pc-doctor/标准模式2.png)
+![体检报告：OpenVINO 状态、设备兼容性与性能基准（standard 模式实测）](images/标准模式2.png)
 
-![体检报告：模型容量评估与部署建议（full 模式实测）](images/ai-pc-doctor/完整模式3.png)
+![体检报告：模型容量评估与部署建议（full 模式实测）](images/完整模式3.png)
 
 ---
 
@@ -165,7 +165,7 @@ OpenVINO: 2026.3.1
 
 用户在 WorkBuddy 里说「帮我检查一下这台电脑适不适合跑本地 AI」，Agent 先渲染三模式对比表让用户选择，随后执行 quick 体检：
 
-![quick 模式：设备概览与 OpenVINO 状态](images/ai-pc-doctor/快速模式.png)
+![quick 模式：设备概览与 OpenVINO 状态](images/快速模式.png)
 
 结论（全部来自真实采集）：
 
@@ -175,7 +175,7 @@ OpenVINO: 2026.3.1
 
 ### 4.2 standard 模式：评分 73/100，短板定位到「内存」而非硬件
 
-![standard 模式：综合评分与分项得分](images/ai-pc-doctor/标准模式1.png)
+![standard 模式：综合评分与分项得分](images/标准模式1.png)
 
 综合评分 **73/100（Basic Local AI）**，分项得分清楚地解释了每一分：
 
@@ -200,7 +200,7 @@ OpenVINO: 2026.3.1
 
 容量估算（ESTIMATED）基于实测可用内存给出：当前可用内存仅约 1.9 GB（占用 87.7%），1B/Qwen 0.5B INT4 推荐、3B 及以上不推荐；同时给出关键提醒——**这台机器硬件底子不差，所有「不推荐」都是被当前内存占用拖累的，释放内存到 8GB+ 后 3B/7B INT4 即可进入可运行区间**。
 
-![standard 模式：模型容量评估](images/ai-pc-doctor/标准模式3.png)
+![standard 模式：模型容量评估](images/标准模式3.png)
 
 ### 4.3 full 模式：真实 LLM 生成实测 + 本地对话体验
 
@@ -215,11 +215,11 @@ full 模式自动从 ModelScope 下载 Qwen2-0.5B-Instruct INT4（约 370 MB）�
 
 full 模式最后还会自动启动一个本地对话服务（加载刚测过的模型），用户直接在浏览器里和本地大模型聊天，流式输出、多轮记忆：
 
-![full 模式：本地对话体验（Qwen2-0.5B INT4 跑在 CPU 上）](images/ai-pc-doctor/完整模式4.png)
+![full 模式：本地对话体验（Qwen2-0.5B INT4 跑在 CPU 上）](images/完整模式4.png)
 
 Agent 最终汇总：评分维持 73/100，短板始终是可用内存（本次仅 2.2 GB）；跑 Qwen 0.5B~1.5B INT4 没问题（0.5B 已实测验证）；想跑 7B+ 的最佳路径是用 RTX 3060（6GB 显存）+ Ollama/llama.cpp 的 CUDA 后端，绕开内存瓶颈。三份报告分别存放在 `output/quick`、`output/standard`、`output/full`（HTML/MD/JSON 三种格式），随时可回看。
 
-![full 模式：Agent 汇总体检结论与最终建议](images/ai-pc-doctor/完整模式1.png)
+![full 模式：Agent 汇总体检结论与最终建议](images/完整模式1.png)
 
 ### 4.4 验证矩阵
 

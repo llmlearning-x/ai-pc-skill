@@ -119,7 +119,7 @@ DB_PASSWORD=123456
 
 ### 整体架构
 
-![系统架构图](https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/docs/images/architecture.png)
+![系统架构图](https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/docs/local-privacy-inspector/images/architecture.png)
 
 架构流程：
 ```
@@ -180,7 +180,7 @@ class Finding:
 
 ## 五、实现：规则引擎 + 脱敏策略
 
-![工作流程图](https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/docs/images/workflow.png)
+![工作流程图](https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/docs/local-privacy-inspector/images/workflow.png)
 
 ### 5.1 检测规则设计
 
@@ -262,7 +262,7 @@ DetectionRule(
 
 ### 5.3 风险分级逻辑
 
-![风险分级规则](https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/docs/images/risk-levels.png)
+![风险分级规则](https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/docs/local-privacy-inspector/images/risk-levels.png)
 
 ```python
 if 发现 API_Key / SecretKey / AccessKey / Token / 数据库连接串 / SSH私钥 / 身份证号 / 银行卡号:
@@ -299,7 +299,7 @@ demo/
 
 ### 测试 1：.env 文件（高风险）
 
-![扫描结果示例](https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/xiaohongshu/demo_result.png)
+![扫描结果示例](https://raw.githubusercontent.com/llmlearning-x/ai-pc-skill/main/assets/xiaohongshu/local-privacy-inspector/demo_result.png)
 
 ```bash
 $ python scripts/skill.py demo/.env
