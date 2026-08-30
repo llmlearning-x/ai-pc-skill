@@ -99,6 +99,7 @@ Agent：调用 scan_privacy_file → OCR 提取 → 检测 → 返回报告
 | Skill | 描述 | 版本 | 标签 |
 |-------|------|------|------|
 | [local-privacy-inspector](./skills/local-privacy-inspector/) | 本地隐私数据检查 Skill，在文件外发前检测敏感信息并生成脱敏报告 | V0.3 | `AIPC` `privacy` `security` `OCR` |
+| [ai-pc-doctor](./skills/ai-pc-doctor/) | AI PC 本地部署体检与 OpenVINO 性能评测 Skill，回答"能不能跑、跑多大、跑哪个设备、跑多快" | V0.3 | `AIPC` `openvino` `benchmark` |
 
 ### local-privacy-inspector 能力
 

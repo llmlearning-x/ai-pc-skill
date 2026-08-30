@@ -1,0 +1,293 @@
+{
+  "meta": {
+    "tool": "AI PC Doctor",
+    "version": "0.2",
+    "mode": "full",
+    "device_filter": null,
+    "generated_at": "2026-08-30T06:39:16.781482+00:00"
+  },
+  "system": {
+    "os": "Darwin",
+    "version": "Darwin Kernel Version 25.6.0: Fri Jul 31 19:18:29 PDT 2026; root:xnu-12377.161.14~5/RELEASE_ARM64_T8122",
+    "release": "25.6.0",
+    "architecture": "arm64",
+    "python_version": "3.12.4"
+  },
+  "cpu": {
+    "vendor": "unknown",
+    "model": "Apple M3",
+    "physical_cores": 8,
+    "logical_cores": 8,
+    "architecture": "arm64"
+  },
+  "gpu": {
+    "gpu": "not_detected",
+    "status": "not_detected",
+    "note": "macOS Apple GPU 不受 OpenVINO GPU 插件支持，OpenVINO 在 macOS 上仅支持 CPU 推理。"
+  },
+  "npu": {
+    "status": "not_detected",
+    "note": "macOS 无 OpenVINO 支持的 Intel NPU。"
+  },
+  "memory": {
+    "total_gb": 24.0,
+    "available_gb": 9.3,
+    "used_percent": 61.3,
+    "disk": {
+      "total_gb": 460.4,
+      "free_gb": 38.7
+    }
+  },
+  "openvino": {
+    "installed": true,
+    "version": "2026.3.1-22476-759c5a6ab8c-releases/2026/3",
+    "available_devices": [
+      "CPU"
+    ],
+    "devices": {
+      "CPU": {
+        "status": "runtime_detected",
+        "instances": [
+          "CPU"
+        ]
+      },
+      "GPU": {
+        "status": "runtime_not_detected",
+        "instances": []
+      },
+      "NPU": {
+        "status": "runtime_not_detected",
+        "instances": []
+      }
+    },
+    "other_devices": []
+  },
+  "device_tests": [
+    {
+      "device": "CPU",
+      "compile": "PASS",
+      "inference": "PASS",
+      "compile_time_ms": 15.8,
+      "output_shape": [
+        1,
+        10
+      ]
+    }
+  ],
+  "benchmarks": [
+    {
+      "device": "CPU",
+      "status": "PASS",
+      "label": "BENCHMARKED",
+      "compile_time_ms": 13.7,
+      "min_latency_ms": 0.054,
+      "avg_latency_ms": 0.07,
+      "max_latency_ms": 0.107,
+      "throughput_infer_per_s": 14223.9,
+      "warmup_runs": 3,
+      "timed_runs": 20,
+      "peak_rss_delta_mb": 0.0,
+      "avg_cpu_percent": 658.2
+    }
+  ],
+  "capacity": {
+    "status": "OK",
+    "label": "ESTIMATED",
+    "available_ram_gb": 9.3,
+    "runtime_overhead_factor": 1.5,
+    "note": "容量估算基于可用内存与每参数字节数，实际性能以 Benchmark 实测为准。",
+    "models": [
+      {
+        "model_size": "1B",
+        "quantization": "FP16",
+        "weights_gb_estimated": 2.0,
+        "required_ram_gb_estimated": 3.0,
+        "recommendation": "RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "1B",
+        "quantization": "INT8",
+        "weights_gb_estimated": 1.0,
+        "required_ram_gb_estimated": 1.5,
+        "recommendation": "EXCELLENT",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "1B",
+        "quantization": "INT4",
+        "weights_gb_estimated": 0.5,
+        "required_ram_gb_estimated": 0.8,
+        "recommendation": "EXCELLENT",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "3B",
+        "quantization": "FP16",
+        "weights_gb_estimated": 6.0,
+        "required_ram_gb_estimated": 9.0,
+        "recommendation": "NOT_RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "3B",
+        "quantization": "INT8",
+        "weights_gb_estimated": 3.0,
+        "required_ram_gb_estimated": 4.5,
+        "recommendation": "RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "3B",
+        "quantization": "INT4",
+        "weights_gb_estimated": 1.5,
+        "required_ram_gb_estimated": 2.2,
+        "recommendation": "EXCELLENT",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "7B",
+        "quantization": "FP16",
+        "weights_gb_estimated": 14.0,
+        "required_ram_gb_estimated": 21.0,
+        "recommendation": "NOT_RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "7B",
+        "quantization": "INT8",
+        "weights_gb_estimated": 7.0,
+        "required_ram_gb_estimated": 10.5,
+        "recommendation": "NOT_RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "7B",
+        "quantization": "INT4",
+        "weights_gb_estimated": 3.5,
+        "required_ram_gb_estimated": 5.2,
+        "recommendation": "LIMITED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "14B",
+        "quantization": "FP16",
+        "weights_gb_estimated": 28.0,
+        "required_ram_gb_estimated": 42.0,
+        "recommendation": "NOT_RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "14B",
+        "quantization": "INT8",
+        "weights_gb_estimated": 14.0,
+        "required_ram_gb_estimated": 21.0,
+        "recommendation": "NOT_RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "14B",
+        "quantization": "INT4",
+        "weights_gb_estimated": 7.0,
+        "required_ram_gb_estimated": 10.5,
+        "recommendation": "NOT_RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "32B",
+        "quantization": "FP16",
+        "weights_gb_estimated": 64.0,
+        "required_ram_gb_estimated": 96.0,
+        "recommendation": "NOT_RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "32B",
+        "quantization": "INT8",
+        "weights_gb_estimated": 32.0,
+        "required_ram_gb_estimated": 48.0,
+        "recommendation": "NOT_RECOMMENDED",
+        "label": "ESTIMATED"
+      },
+      {
+        "model_size": "32B",
+        "quantization": "INT4",
+        "weights_gb_estimated": 16.0,
+        "required_ram_gb_estimated": 24.0,
+        "recommendation": "NOT_RECOMMENDED",
+        "label": "ESTIMATED"
+      }
+    ]
+  },
+  "readiness_score": {
+    "score": null,
+    "level": null,
+    "note": "当前平台（Darwin / arm64）不是主要 Intel AI PC 目标平台，进入降级模式：仅输出环境说明，不输出 Readiness Score。",
+    "disclaimer": "Readiness Score 是工具内部综合评价，不代表 Intel 官方认证。"
+  },
+  "recommendations": [
+    {
+      "device": "CPU",
+      "recommendation": "CPU 实测可用，适合兼容性任务、小型模型与兜底（fallback）推理；实测平均延迟 0.07 ms。"
+    }
+  ],
+  "model_recommendations": [
+    {
+      "name": "Qwen2.5-0.5B-Instruct INT4",
+      "size_b": 0.5,
+      "grade": "EXCELLENT",
+      "device": "CPU",
+      "label": "BENCHMARKED",
+      "reason": "已在本机完成真实生成式 Benchmark 实测"
+    },
+    {
+      "name": "Qwen2.5-1.5B-Instruct INT4",
+      "size_b": 1.5,
+      "grade": "EXCELLENT",
+      "device": "CPU",
+      "label": "ESTIMATED",
+      "reason": "估算需 1.1 GB 内存（可用 9.3 GB），容量上可运行，实际体验以实测为准"
+    },
+    {
+      "name": "Qwen2.5-3B-Instruct INT4",
+      "size_b": 3,
+      "grade": "EXCELLENT",
+      "device": "CPU",
+      "label": "ESTIMATED",
+      "reason": "估算需 2.2 GB 内存（可用 9.3 GB），容量上可运行，实际体验以实测为准"
+    },
+    {
+      "name": "Qwen2.5-7B-Instruct INT4",
+      "size_b": 7,
+      "grade": "LIMITED",
+      "device": "CPU",
+      "label": "ESTIMATED",
+      "reason": "估算需 5.2 GB 内存（可用 9.3 GB），容量上可运行，实际体验以实测为准"
+    }
+  ],
+  "genai": {
+    "status": "PASS",
+    "label": "BENCHMARKED",
+    "model": "Qwen2-0.5B-Instruct-int4-ov",
+    "model_size_mb": 367.5,
+    "model_source": "modelscope",
+    "results": [
+      {
+        "status": "PASS",
+        "label": "BENCHMARKED",
+        "device": "CPU",
+        "model": "Qwen2-0.5B-Instruct-int4-ov",
+        "model_path": "/Users/fanghua/code/ai-pc-learning/ai-pc-doctor/models/genai/Qwen2-0.5B-Instruct-int4-ov",
+        "model_load_time_s": 11.45,
+        "ttft_ms": 174.5,
+        "tpot_ms": 19.8,
+        "throughput_tokens_per_s": 45.0,
+        "input_tokens": 52,
+        "output_tokens": 63,
+        "max_new_tokens": 64,
+        "peak_rss_delta_mb": 2393.0
+      }
+    ]
+  },
+  "errors": []
+}

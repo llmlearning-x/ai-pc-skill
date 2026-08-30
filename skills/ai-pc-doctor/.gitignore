@@ -1,0 +1,10 @@
+# 运行产物
+output/
+__pycache__/
+*.pyc
+
+# 保留 models/mnist-8.onnx（随仓库分发的 Smoke Test 模型），忽略其它模型缓存
+models/*
+!models/mnist-8.onnx
+_user_meta.json
+kernel.errors.txt

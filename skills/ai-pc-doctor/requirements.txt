@@ -1,0 +1,5 @@
+openvino>=2024.0
+openvino-genai>=2024.0
+psutil>=5.9
+numpy>=1.24
+modelscope>=1.20
